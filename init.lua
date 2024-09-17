@@ -91,7 +91,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+-- vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -118,8 +119,16 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+-- ME -wrap setup, needed?
+vim.opt.wrap = true
+vim.opt.textwidth = 79
+
 -- Enable break indent
 vim.opt.breakindent = true
+--ME more indent options
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.cindent = true -- pickier c indentation rules
 
 -- Save undo history
 vim.opt.undofile = true
@@ -127,6 +136,29 @@ vim.opt.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- ME screen flash instead of audible bell
+vim.opt.visualbell = true
+
+-- ME show matching brackets according to % ({[]})
+vim.opt.showmatch = true
+
+-- ME tab handling
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+-- vim.opt.tabstop = 2  -- not req'd - see vim-sleuth plugin below
+-- vim.opt.softtabstop = 2
+
+-- ME enhanced tab completion for files - needed?
+vim.opt.wildmenu = true
+-- vim.opt.path+=**
+--
+-- ME incremental cmd display
+vim.opt.inccommand = 'split'
+
+-- ME vimdiff options, ingnoring whitespace
+-- vim.opt.diffopt = iwhiteall
+-- vim.opt.diffopt = iwhite   -- <vim 8.1
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -156,6 +188,11 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- ME - key remap needed?  Used to arrow keys for menu selection.  see .vimrc
+-- ME - example:
+-- ME - inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
+-- ME - equivalent code for nvim/lua?  possible to have multiple options - Ctrl-Y + Right?
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -605,11 +642,18 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
+        -- pylyzer= {},                 -- ME alternate to pyright for Python
+        -- python-lsp-server = {},      -- ME alternatee to pyright for Python
         -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+        -- cmake-language-server = {},  --ME for CMake astoundingly
+        verible = {},                   -- ME ChipAlliance system verilog / verilog
+        -- vls {},                      -- ME alt dalance system verilog / verilog
+        -- vhdl_ls {},                  -- ME Olof Kraigher?
+        -- bash-language-server {},     -- ME https://github.com/bash-lsp/bash-language-server
+        -- -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -835,7 +879,8 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-moon'
+      --vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'

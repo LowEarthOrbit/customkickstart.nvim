@@ -14,6 +14,16 @@ return {
       -- lint.linters_by_ft = lint.linters_by_ft or {}
       -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
       --
+      -- ME - unsure of syntax but here are other language linters supported by
+      -- this plugin (see https://github.com/mfussenegger/nvim-lint) :
+      -- "GHDL" /vhdl:
+      -- "flake8" /python:
+      -- "pylint" /python:
+      -- "cpplint" /modern C++ based on google/styleguide:
+      -- "clangtidy" /clang-tidy c++, can specify sub-groups of checks?
+      -- "cmakelink" /cmake checker
+      -- "Verilator" /system verilog, verilog lint
+      --
       -- However, note that this will enable a set of default linters,
       -- which will cause errors unless these tools are available:
       -- {
